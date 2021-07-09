@@ -24,6 +24,7 @@
 	text-align: center;
 	font-size: 75px;
 	font-family: 'Staatliches', cursive;
+	text-shadow: 2px 2px 4px white;
 }
 
 
@@ -34,9 +35,7 @@
 }
 
 #mainScreen {
-	 border-left: 6px solid #A9A9A9;
-	 background-color: grey;
-	 border-width: 10px;
+ background: linear-gradient(64deg, #018AE6 80%, white 70%);
 }
 
 #descriptionUnderTitle {
@@ -47,18 +46,20 @@
 #openTerminalButton {
 	width: 35%;
 	height: 35%;
-	background-color: darkcyan;
+	background: linear-gradient(64deg, #0066ff 49%, #b3b3cc 40%);
 	color: white;
 	border-style: round;
-	border-radius: 15px;
-	border-color: blueviolet;
+	border-radius: 20px;
+	border-color: #0066ff;
 	font-size: 30px;
 	font-family: 'Fira Code', monospace;
 	text-align: center;
 	margin-left: 32.5%;
 	margin-right: 32.5%;
-	transition: width 2s;
+	text-shadow: 2px 2px 4px #000000;
+	transition-duration: 1s;
 }
+
 @keyframes grow {
 	from { width: 35%; margin-left: 32.5%; margin-right: 32.5%; }
 	to { width: 40%; margin-left: 30%; margin-right: 30%; }
@@ -67,7 +68,9 @@
 	animation-name: grow;
 	animation-duration: 2s;
 	animation-direction: alternate;
-	 animation-iteration-count: 2;
+	animation-iteration-count: 2;
+	background: White;
+	cursor:none;
 }
 
 
@@ -77,7 +80,7 @@
   <script id="insert"></script>
 
 
-    <script src="/js/stringify.js?52c580aef7aa99af3b5f5e894938ffee58cc70e5" charset="utf-8"></script>
+    <script src="/js/stringify.js?512d8e4cdb707dc1d3c1fef01ecde885570a61fd" charset="utf-8"></script>
     <script>
       const customConsole = (w) => {
         const pushToConsole = (payload, type) => {
@@ -160,7 +163,8 @@
   <p id="descriptionUnderTitle">Web-Nebula is a open-source terminal application, designed for the web. Credits to @sharmnten (Neal) on Replit for the idea. </p>
 	<div id="ButtonDiv">
 	  <button onClick="terminal()" id="openTerminalButton"> Web-Nebula Terminal </button>
-		<hr size="3px" width="1875px" color="black">
+		<br>
+		<hr size="1px" width="5000px" color="white">
 		<p id="github"> Since this is open-source, I just had to make a Github for it. You can make pull requests for errors, suggestions, and more! Here is the link! <a href="http://github.com/B-Man2019/Web-Nebula">GitHub Repo</a> </p>
 
 	</div>
@@ -170,7 +174,6 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Open+Sans&family=Staatliches&display=swap');
 </style>
-
 
 
 
@@ -193,74 +196,108 @@ var command9 = "/exit = Exit the console. "
 function terminal() {
   var command = prompt(message);
 
+// User Input Checkers
   if (command === "/commands") {
     alert(command1 + command2 + command3 + command4 + command5 + command6 + command7 + command8 + command9)
   } else if (command === "/calculator") {
-    function calculator() {
-      console.log("User just command " + command + ".")
-      var whichFuntionCalculator = prompt("What math function would you like to use? (Options: Add, Subtract, Multiply, Divide)")
-      if (whichFuntionCalculator === "Add") {
-        var calculatorNumber1 = prompt("Enter the first number to add up: ")
-        var calculatorNumber2 = prompt("Enter the second number to add: ")
-        var calculatorAnswer = parseInt(calculatorNumber1, 10) + parseInt(calculatorNumber2, 10)
-        alert("The answer is: " + calculatorAnswer)
-        terminal()
-      } else if (whichFuntionCalculator === "Subtract") {
-        var calculatorNumber1 = prompt("Enter the first number to subtract: ")
-        var calculatorNumber2 = prompt("Enter the second number to subtract: ")
-        var calculatorAnswer = parseInt(calculatorNumber1, 10) - parseInt(calculatorNumber2, 10)
-        alert("The answer is: " + calculatorAnswer)
-        terminal()
-      } else if (whichFuntionCalculator === "Multiply") {
-        var calculatorNumber1 = prompt("Enter the first number to multiply: ")
-        var calculatorNumber2 = prompt("Enter the second number to multiply: ")
-        var calculatorAnswer = parseInt(calculatorNumber1, 10) * parseInt(calculatorNumber2, 10)
-        alert("The answer is: " + calculatorAnswer)
-        terminal()
-      } else if (whichFuntionCalculator === "Divide") {
-        var calculatorNumber1 = prompt("Enter the first number to divide: ")
-        var calculatorNumber2 = prompt("Enter the second number to divide: ")
-        var calculatorAnswer = parseInt(calculatorNumber1, 10) / parseInt(calculatorNumber2, 10)
-        alert("The answer is: " + calculatorAnswer)
-        terminal()
-      } else {
-        alert("Invalid input. Remember, inputs are cAsE sEnSiTiVe!")
-        calculator()
-      }
-      calculator()
-    }
-
+		console.log("User just command " + command + ".")
+    calculator()
   } else if (command === "/sudo-apt update") {
     console.log("User just command " + command + ".")
-    alert("Fetching updates... No updates found. ")
-    terminal()
+		sudoAptUpdate()
   } else if (command === "/rickroll") {
     console.log("User just command " + command + ".")
-    alert("Here is a link to rickroll your friends! https://www.youtube.com/watch?v=dQw4w9WgXcQ. Have fun! (Use responsibly. I have no liability if you anger your friends with this)")
-    terminal()
+		rickroll()
   } else if (command === "/hack") {
     console.log("User just command " + command + ".")
-    alert("As cool as it may sound, hacking is illegal. I would never hack, and especially not put it into my software. DON'T HACK. Sorry!")
-    terminal()
+		hack()
   } else if (command === "/dir") {
     console.log("User just command " + command + ".")
-    alert("ERROR: No drive connected. No files to display.")
-    terminal()
+		dir()
   } else if (command === "/del") {
     console.log("User just command " + command + ".")
-    alert("ERROR: No drive connected. No files to delete.")
-    terminal()
+		del()
   } else if (command === "/cd") {
     console.log("User just command " + command + ".")
-    alert("ERROR: No drive connected. Nothing to navigate through.")
-    terminal()
+		cd()
   } else if (command === "/exit") {
     alert("Exiting Console...")
     console.log("User exiting console...")
+  } else if (command === null) {
+    alert("Exiting Console...")
+  } else if (command === "") {
+    alert("Please enter a command.")
+    terminal()
   } else {
     alert("ERROR. COMMAND " + command + " IS NOT FOUND. REFER TO /commands FOR A LIST OF COMMANDS.")
     terminal()
   }
+
+// Command Functions
+
+  function calculator() {
+    console.log("User just command " + command + ".")
+    var whichFuntionCalculator = prompt("What math function would you like to use? (Options: Add, Subtract, Multiply, Divide)")
+    if (whichFuntionCalculator === "Add") {
+      var calculatorNumber1 = prompt("Enter the first number to add up: ")
+      var calculatorNumber2 = prompt("Enter the second number to add: ")
+      var calculatorAnswer = parseInt(calculatorNumber1, 10) + parseInt(calculatorNumber2, 10)
+      alert("The answer is: " + calculatorAnswer)
+      terminal()
+    } else if (whichFuntionCalculator === "Subtract") {
+      var calculatorNumber1 = prompt("Enter the first number to subtract: ")
+      var calculatorNumber2 = prompt("Enter the second number to subtract: ")
+      var calculatorAnswer = parseInt(calculatorNumber1, 10) - parseInt(calculatorNumber2, 10)
+      alert("The answer is: " + calculatorAnswer)
+      terminal()
+    } else if (whichFuntionCalculator === "Multiply") {
+      var calculatorNumber1 = prompt("Enter the first number to multiply: ")
+      var calculatorNumber2 = prompt("Enter the second number to multiply: ")
+      var calculatorAnswer = parseInt(calculatorNumber1, 10) * parseInt(calculatorNumber2, 10)
+      alert("The answer is: " + calculatorAnswer)
+      terminal()
+    } else if (whichFuntionCalculator === "Divide") {
+      var calculatorNumber1 = prompt("Enter the first number to divide: ")
+      var calculatorNumber2 = prompt("Enter the second number to divide: ")
+      var calculatorAnswer = parseInt(calculatorNumber1, 10) / parseInt(calculatorNumber2, 10)
+      alert("The answer is: " + calculatorAnswer)
+      terminal()
+    } else {
+      alert("Invalid input. Remember, inputs are cAsE sEnSiTiVe!")
+			calculator()
+    }
+  }
+	
+	function sudoAptUpdate() {
+		alert("Fetching updates... No updates found. ")
+    terminal()
+	}
+	
+	function rickroll() {
+	  alert("Here is a link to rickroll your friends! https://www.youtube.com/watch?v=dQw4w9WgXcQ. Have fun! (Use responsibly. I have no liability if you anger your friends with this)")
+    terminal()
+	}
+	
+	function hack() {
+	  alert("As cool as it may sound, hacking is illegal. I would never hack, and especially not put it into my software. DON'T HACK. Sorry!")
+    terminal()
+	}
+	
+	function dir() {
+	  alert("ERROR: No drive connected. No files to display.")
+    terminal()
+	}
+	
+	function del() {
+	  alert("ERROR: No drive connected. No files to delete.")
+    terminal()
+	}
+	
+	function cd() {
+	  alert("ERROR: No drive connected. Nothing to navigate through.")
+    terminal()
+	}
+
 
 
 
