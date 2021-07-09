@@ -26,9 +26,6 @@
 	font-family: 'Staatliches', cursive;
 }
 
-#githubIcon {
-	width: 3%;
-}
 
 #github {
 	font-family: 'Open Sans', sans-serif;
@@ -80,7 +77,7 @@
   <script id="insert"></script>
 
 
-    <script src="/js/stringify.js?512d8e4cdb707dc1d3c1fef01ecde885570a61fd" charset="utf-8"></script>
+    <script src="/js/stringify.js?52c580aef7aa99af3b5f5e894938ffee58cc70e5" charset="utf-8"></script>
     <script>
       const customConsole = (w) => {
         const pushToConsole = (payload, type) => {
@@ -163,8 +160,8 @@
   <p id="descriptionUnderTitle">Web-Nebula is a open-source terminal application, designed for the web. Credits to @sharmnten (Neal) on Replit for the idea. </p>
 	<div id="ButtonDiv">
 	  <button onClick="terminal()" id="openTerminalButton"> Web-Nebula Terminal </button>
-		<hr size="5px" width="1875px" color="black">
-		<p id="github"> Since this is open-source, I just had to make a Github for it. You can make pull requests for errors, suggestions, and more! Click on the Github icon to open it! 	  <img src="https://image.flaticon.com/icons/png/512/25/25231.png" id="githubIcon" href=""></p>
+		<hr size="3px" width="1875px" color="black">
+		<p id="github"> Since this is open-source, I just had to make a Github for it. You can make pull requests for errors, suggestions, and more! Here is the link! <a href="http://github.com/B-Man2019/Web-Nebula">GitHub Repo</a> </p>
 
 	</div>
 </div>
@@ -278,7 +275,7 @@ function terminal() {
     if (window.parent && window.parent.parent){
       window.parent.parent.postMessage(["resultsFrame", {
         height: document.body.getBoundingClientRect().height,
-        slug: "Lnaxfzpg"
+        slug: ""
       }], "*")
     }
 
