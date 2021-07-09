@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>CYOA Base Demo</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script
+    type="text/javascript"
+    src="/js/lib/dummy.js"
+    
+  ></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      #title {
+	text-align: center;
+	font-size: 75px;
+	font-family: 'Staatliches', cursive;
+}
+
+#githubIcon {
+	width: 3%;
+}
+
+#github {
+	font-family: 'Open Sans', sans-serif;
+	padding-left: 15px;
+	padding-bottom: 20px;
+}
+
+#mainScreen {
+	 border-left: 6px solid #A9A9A9;
+	 background-color: grey;
+	 border-width: 10px;
+}
+
+#descriptionUnderTitle {
+	font-family: 'Open Sans', sans-serif;
+	padding-left: 15px;
+}
+
+#openTerminalButton {
+	width: 35%;
+	height: 35%;
+	background-color: darkcyan;
+	color: white;
+	border-style: round;
+	border-radius: 15px;
+	border-color: blueviolet;
+	font-size: 30px;
+	font-family: 'Fira Code', monospace;
+	text-align: center;
+	margin-left: 32.5%;
+	margin-right: 32.5%;
+	transition: width 2s;
+}
+@keyframes grow {
+	from { width: 35%; margin-left: 32.5%; margin-right: 32.5%; }
+	to { width: 40%; margin-left: 30%; margin-right: 30%; }
+}
+#openTerminalButton:hover {
+	animation-name: grow;
+	animation-duration: 2s;
+	animation-direction: alternate;
+	 animation-iteration-count: 2;
+}
+
+
+    /* EOS */
+  </style>
+
+  <script id="insert"></script>
+
+
+    <script src="/js/stringify.js?512d8e4cdb707dc1d3c1fef01ecde885570a61fd" charset="utf-8"></script>
+    <script>
+      const customConsole = (w) => {
+        const pushToConsole = (payload, type) => {
+          w.parent.postMessage({
+            console: {
+              payload: stringify(payload),
+              type:    type
+            }
+          }, "*")
+        }
+
+        w.onerror = (message, url, line, column) => {
+          // the line needs to correspond with the editor panel
+          // unfortunately this number needs to be altered every time this view is changed
+          line = line - 70
+          if (line < 0){
+            pushToConsole(message, "error")
+          } else {
+            pushToConsole(`[${line}:${column}] ${message}`, "error")
+          }
+        }
+
+        let console = (function(systemConsole){
+          return {
+            log: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "log")
+              systemConsole.log.apply(this, args)
+            },
+            info: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "info")
+              systemConsole.info.apply(this, args)
+            },
+            warn: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "warn")
+              systemConsole.warn.apply(this, args)
+            },
+            error: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "error")
+              systemConsole.error.apply(this, args)
+            },
+            system: function(arg){
+              pushToConsole(arg, "system")
+            },
+            clear: function(){
+              systemConsole.clear.apply(this, {})
+            },
+            time: function(){
+              let args = Array.from(arguments)
+              systemConsole.time.apply(this, args)
+            },
+            assert: function(assertion, label){
+              if (!assertion){
+                pushToConsole(label, "log")
+              }
+
+              let args = Array.from(arguments)
+              systemConsole.assert.apply(this, args)
+            }
+          }
+        }(window.console))
+
+        window.console = { ...window.console, ...console }
+
+        console.system("Running fiddle")
+      }
+
+      if (window.parent){
+        customConsole(window)
+      }
+    </script>
+</head>
+<body>
+    <!-- Welcome Screen -->
+<div id="mainScreen">
+  <h1 id="title"> Web-Nebula </h1>
+  <p id="descriptionUnderTitle">Web-Nebula is a open-source terminal application, designed for the web. Credits to @sharmnten (Neal) on Replit for the idea. </p>
+	<div id="ButtonDiv">
+	  <button onClick="terminal()" id="openTerminalButton"> Web-Nebula Terminal </button>
+		<hr size="5px" width="1875px" color="black">
+		<p id="github"> Since this is open-source, I just had to make a Github for it. You can make pull requests for errors, suggestions, and more! Click on the Github icon to open it! 	  <img src="https://image.flaticon.com/icons/png/512/25/25231.png" id="githubIcon" href=""></p>
+
+	</div>
+</div>
+
+<!-- Fonts -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Open+Sans&family=Staatliches&display=swap');
+</style>
+
+
+
+
+    <script type="text/javascript">//<![CDATA[
+
+
+// Variables
+var message = "Welcome to WebNebula. Enter commands below. Do /commands to get a list of commands. Or do /exit to exit";
+var command1 = "/commands = The screen you're looking at right now. "
+var command2 = "/calculator = A program that can do any mathmatical function to 2 numbers. "
+var command3 = "/sudo-apt update = Update firmware, if applicable. "
+var command4 = "/rickroll = Get a link to rickroll your friends. "
+var command5 = "/hack = Hack into anything you can imagine (Restrictions Apply) "
+var command6 = "/dir = List the files in the current folder, if applicable. "
+var command7 = "/del = delete the file listed, if applicable. "
+var command8 = "/cd = Change directory, if applicable. "
+var command9 = "/exit = Exit the console. "
+
+// Welcome Screen
+function terminal() {
+  var command = prompt(message);
+
+  if (command === "/commands") {
+    alert(command1 + command2 + command3 + command4 + command5 + command6 + command7 + command8 + command9)
+  } else if (command === "/calculator") {
+    function calculator() {
+      console.log("User just command " + command + ".")
+      var whichFuntionCalculator = prompt("What math function would you like to use? (Options: Add, Subtract, Multiply, Divide)")
+      if (whichFuntionCalculator === "Add") {
+        var calculatorNumber1 = prompt("Enter the first number to add up: ")
+        var calculatorNumber2 = prompt("Enter the second number to add: ")
+        var calculatorAnswer = parseInt(calculatorNumber1, 10) + parseInt(calculatorNumber2, 10)
+        alert("The answer is: " + calculatorAnswer)
+        terminal()
+      } else if (whichFuntionCalculator === "Subtract") {
+        var calculatorNumber1 = prompt("Enter the first number to subtract: ")
+        var calculatorNumber2 = prompt("Enter the second number to subtract: ")
+        var calculatorAnswer = parseInt(calculatorNumber1, 10) - parseInt(calculatorNumber2, 10)
+        alert("The answer is: " + calculatorAnswer)
+        terminal()
+      } else if (whichFuntionCalculator === "Multiply") {
+        var calculatorNumber1 = prompt("Enter the first number to multiply: ")
+        var calculatorNumber2 = prompt("Enter the second number to multiply: ")
+        var calculatorAnswer = parseInt(calculatorNumber1, 10) * parseInt(calculatorNumber2, 10)
+        alert("The answer is: " + calculatorAnswer)
+        terminal()
+      } else if (whichFuntionCalculator === "Divide") {
+        var calculatorNumber1 = prompt("Enter the first number to divide: ")
+        var calculatorNumber2 = prompt("Enter the second number to divide: ")
+        var calculatorAnswer = parseInt(calculatorNumber1, 10) / parseInt(calculatorNumber2, 10)
+        alert("The answer is: " + calculatorAnswer)
+        terminal()
+      } else {
+        alert("Invalid input. Remember, inputs are cAsE sEnSiTiVe!")
+        calculator()
+      }
+      calculator()
+    }
+
+  } else if (command === "/sudo-apt update") {
+    console.log("User just command " + command + ".")
+    alert("Fetching updates... No updates found. ")
+    terminal()
+  } else if (command === "/rickroll") {
+    console.log("User just command " + command + ".")
+    alert("Here is a link to rickroll your friends! https://www.youtube.com/watch?v=dQw4w9WgXcQ. Have fun! (Use responsibly. I have no liability if you anger your friends with this)")
+    terminal()
+  } else if (command === "/hack") {
+    console.log("User just command " + command + ".")
+    alert("As cool as it may sound, hacking is illegal. I would never hack, and especially not put it into my software. DON'T HACK. Sorry!")
+    terminal()
+  } else if (command === "/dir") {
+    console.log("User just command " + command + ".")
+    alert("ERROR: No drive connected. No files to display.")
+    terminal()
+  } else if (command === "/del") {
+    console.log("User just command " + command + ".")
+    alert("ERROR: No drive connected. No files to delete.")
+    terminal()
+  } else if (command === "/cd") {
+    console.log("User just command " + command + ".")
+    alert("ERROR: No drive connected. Nothing to navigate through.")
+    terminal()
+  } else if (command === "/exit") {
+    alert("Exiting Console...")
+    console.log("User exiting console...")
+  } else {
+    alert("ERROR. COMMAND " + command + " IS NOT FOUND. REFER TO /commands FOR A LIST OF COMMANDS.")
+    terminal()
+  }
+
+
+
+}
+
+
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "Lnaxfzpg"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+
+    <script>
+      let allLines = []
+
+      window.addEventListener("message", (message) => {
+        if (message.data.console){
+          let insert = document.querySelector("#insert")
+          allLines.push(message.data.console.payload)
+          insert.innerHTML = allLines.join(";\r")
+
+          let result = eval.call(null, message.data.console.payload)
+          if (result !== undefined){
+            console.log(result)
+          }
+        }
+      })
+    </script>
+
+</body>
+</html>
